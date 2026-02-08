@@ -12,12 +12,16 @@ import {
   Card
 } from '@tremor/react';
 import { useAppDispatch, useAppSelector } from '../hooks/store'
-import { deleteUserById, type UserId } from '../store/users/silce';
+import { addNewUser, deleteUserById, type UserId } from '../store/users/slice';
 
 
-export default function LisOfUsers() {
+export default function ListOfUsers() {
   const users = useAppSelector ((state) => state.users);
   const dispatch = useAppDispatch();
+
+  const addUser = ({ name, email, github }: NewUserPayload) => {
+    dispatch(addNewUser({ name, email, github }));
+  };
 
   const handdleRemoveUser = (id: UserId) => {
     dispatch(deleteUserById(id));
